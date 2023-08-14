@@ -64,7 +64,7 @@ nav ul li a:hover {
 }
 /*Navbar ends*/
 
-/*Hero starts*/
+/*Hero section starts*/
 .hero {
   background: url(../img/pexels-felix-mittermeier-956999.jpg) no-repeat center;
   background-size: cover;
@@ -93,4 +93,20 @@ nav ul li a:hover {
     background-color: #3c84f0;
     transition: .5s;
 }
-/*hero*/
+/*hero section ends*/
+
+/*About section starts*/
+.about {
+  background-color: black;
+  background-size: cover;
+  height: 570px;
+}
+.about p{
+    width: 500px;
+}
+.about h1{
+    width: 500px;
+}
+.about img{
+    border-radius: 4px;
+}
