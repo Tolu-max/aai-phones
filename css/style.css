@@ -13,17 +13,14 @@ nav {
 }
 
 label.logo {
-    color: white;
-    font-size: 35px;
-    line-height: 80px;
     padding: 0 100px;
-    font-weight: bold;
 }
 
 nav ul {
     float: right;
     margin-right: 20px;
 }
+
 
 nav ul li {
     line-height: 80px;
@@ -40,11 +37,13 @@ nav ul li a {
     font-size: 17px;
 }
 
-a.active,a:hover {
+nav ul li a:hover {
     color: rgb(72, 250, 250);
     background-color: #3c84f0;
     transition: .5s;
 }
+
+
 
 /*Hamburger menu*/
 .checkbtn {
@@ -56,71 +55,42 @@ a.active,a:hover {
     cursor: pointer;
     display: none;
 }
-
+.logo img {
+    position: relative;
+    left: 230px;
+}
 #check {
     display: none;
 }
 /*Navbar ends*/
 
-/*1st Section*/
-.f1 {
-    margin-left: 70px;
-    font-size: 35px;
-    margin-top: 50px;
-    line-height: 65px;
+/*Hero starts*/
+.hero {
+  background: url(../img/pexels-felix-mittermeier-956999.jpg) no-repeat center;
+  background-size: cover;
+  height: 570px;
 }
 
-.f1 h1{
-    color: #294446;
-}
-.f1 h2{
-    color: #294446;
-}
-
-.f1s {
-    color: rgb(117, 117, 255);
+.btn-hero {
+    padding: 8px 16px;
+    outline: none;
+    background-color: rgb(72, 250, 250);
+    border: none;
 }
 
-#element {
-    color: rgb(245, 68, 45);
+.hero h1 {
+    font-size: 52px;
 }
 
-/*1st section Icons*/
-.icons {
-    margin-left: 70px;
-    font-size: 35px;
-    line-height: 65px;
+.hero p{
+    font-size: 33px;
+    width: 500px;
 }
-
-.icons i {
-    letter-spacing: 0.5em;
+.btn-hero a{
+    text-decoration: none;
 }
-
-.icons i a{
-    color: #294446;
-}
-
-i a:hover{
-    color: #6595dd;
+.btn-hero:hover{
+    background-color: #3c84f0;
     transition: .5s;
 }
-
-.btn {
-    margin: 0 70px;
-    background-color: #388be9;
-    border: none;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: solid;
-    display: inline-block;
-    font-size: 15px;
-    border-radius: 8px;
-    color: #6595dd;
-}
-.bwtn {
-    line-height: 80px;
-}
-.btn:hover {
-    background-color: #3c84f0;
-    transition: all .5s;
-}
+/*hero*/

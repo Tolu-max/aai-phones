@@ -9,6 +9,13 @@
 </head>
 
 <body>
+    <style>
+        nav ul li a.active {
+    color: rgb(72, 250, 250);
+    background-color: #3c84f0;
+    transition: .5s;
+}
+    </style>
     <!--Navbar starts-->
     <nav>
         <input type="checkbox" id="check">
@@ -18,8 +25,8 @@
         <label for="" class="logo"><img src="img/logo.png" width="80px" height="80px" alt=""></label>
         <ul>
             <li><a class="active" href="">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="">Skills</a></li>
+            <li><a href="">About</a></li>
+            <li><a href="">Products</a></li>
             <li><a href="">Contact</a></li>
         </ul>
     </nav>
@@ -28,14 +35,15 @@
 
     <!--hero starts-->
     <div class="hero">
-        <h1>
+        <h1 style="color: white;     left: 150px;
+        position: relative;">
             AAI Phones
         </h1>
-        <p>
+        <p style="color: white;">
             A mobile phone shop that sells the latest smartphone models
         </p>
         <button class="btn-hero">
-            <a href="services">View Services</a>
+            <a href="">View Services</a>
         </button>
     </div>
     <!--Hero Ends-->
