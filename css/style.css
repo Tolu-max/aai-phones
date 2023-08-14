@@ -1,0 +1,124 @@
+/*Basic functions or i dont now a name to gve it. */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+nav {
+    background: rgb(10, 186, 255);
+    height: 80px;
+    width: 100%;
+}
+
+label.logo {
+    color: white;
+    font-size: 35px;
+    line-height: 80px;
+    padding: 0 100px;
+    font-weight: bold;
+}
+
+nav ul {
+    float: right;
+    margin-right: 20px;
+}
+
+nav ul li {
+    line-height: 80px;
+    margin: 0 5px;
+    display: inline-block;
+}
+
+nav ul li a {
+    color: white;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-size: 17px;
+}
+
+a.active,a:hover {
+    color: rgb(72, 250, 250);
+    transition: .5s;
+}
+
+/*Hamburger menu*/
+.checkbtn {
+    font-size: 30px;
+    color: white;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+
+#check {
+    display: none;
+}
+/*Navbar ends*/
+
+/*1st Section*/
+.f1 {
+    margin-left: 70px;
+    font-size: 35px;
+    margin-top: 50px;
+    line-height: 65px;
+}
+
+.f1 h1{
+    color: #294446;
+}
+.f1 h2{
+    color: #294446;
+}
+
+.f1s {
+    color: rgb(117, 117, 255);
+}
+
+#element {
+    color: rgb(245, 68, 45);
+}
+
+/*1st section Icons*/
+.icons {
+    margin-left: 70px;
+    font-size: 35px;
+    line-height: 65px;
+}
+
+.icons i {
+    letter-spacing: 0.5em;
+}
+
+.icons i a{
+    color: #294446;
+}
+
+i a:hover{
+    color: #6595dd;
+    transition: .5s;
+}
+
+.btn {
+    margin: 0 70px;
+    background-color: #388be9;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: solid;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 8px;
+    color: #6595dd;
+}
+.bwtn {
+    line-height: 80px;
+}
+.btn:hover {
+    background-color: #3c84f0;
+    transition: all .5s;
+}
