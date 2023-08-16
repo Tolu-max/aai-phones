@@ -74,7 +74,7 @@ nav ul li a:hover {
 .btn-hero {
     padding: 8px 16px;
     outline: none;
-    background-color: rgb(72, 250, 250);
+    background-color: #3c84f0;
     border: none;
 }
 
@@ -86,13 +86,17 @@ nav ul li a:hover {
     font-size: 33px;
     width: 500px;
 }
+  
+  .btn-hero:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
 .btn-hero a{
     text-decoration: none;
+    color: rgb(72, 250, 250);
 }
-.btn-hero:hover{
-    background-color: #3c84f0;
-    transition: .5s;
-}
+
 /*hero section ends*/
 
 /*About section starts*/
