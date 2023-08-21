@@ -814,20 +814,24 @@
                     function updateStorageButtons() {
                         const selectedModel = document.querySelector('input[name="model"]:checked').value;
                         storageButtons.forEach(button => {
-                            if ((selectedModel === 'iphone14pro' || selectedModel === 'iphone14promax') && button.value === '64GB') {
-                                button.disabled = true;
-                                button.classList.remove('active');
-                            } else if (selectedModel === 'iphone14' || selectedModel === 'iphone14plus') {
-                                if (button.value === '512GB') {
-                                    button.disabled = true;
-                                    button.classList.remove('active');
-                                } else {
-                                    button.disabled = false;
-                                }
-                            } else {
-                                button.disabled = false;
-                            }
-                        });
+    if ((selectedModel === 'iphone14pro' || selectedModel === 'iphone14promax') && button.value === '64GB') {
+        button.disabled = true;
+        button.classList.remove('active');
+    } else if (selectedModel === 'iphone14' || selectedModel === 'iphone14plus') {
+        if (button.value === '512GB') {
+            button.disabled = true;
+            button.classList.remove('active');
+        } else {
+            button.disabled = false;
+        }
+    } else {
+        button.disabled = false;
+    }
+
+    if (button.disabled) {
+        button.classList.remove('active'); // Remove active class if disabled
+    }
+});
             
                         if (document.querySelector('.storage-btn.active').disabled) {
                             updatePrice();
