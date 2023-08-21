@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>iPhone 12 Series</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <h1 class="mt-3">iPhone 12 Series</h1>
+    
+    <div class="btn-group mt-3" role="group" aria-label="Model Options">
+        <label class="btn btn-outline-primary">
+            <input type="radio" name="model" value="iphone12"> iPhone 12
+        </label>
+        <label class="btn btn-outline-primary">
+            <input type="radio" name="model" value="iphone12pro"> iPhone 12 Pro
+        </label>
+        <label class="btn btn-outline-primary">
+            <input type="radio" name="model" value="iphone12promax"> iPhone 12 Pro Max
+        </label>
+    </div>
+    
+    <div class="btn-group mt-3" role="group" aria-label="Storage Options">
+        <button type="button" class="btn btn-outline-primary storage-btn" value="64GB">64GB</button>
+        <button type="button" class="btn btn-outline-primary storage-btn" value="128GB">128GB</button>
+        <button type="button" class="btn btn-outline-primary storage-btn" value="256GB">256GB</button>
+        <button type="button" class="btn btn-outline-primary storage-btn" value="512GB">512GB</button>
+    </div>
+
+    <div class="mt-3">
+        <label for="condition">Phone Condition:</label>
+        <select id="condition" name="condition">
+            <option value="new">New</option>
+            <option value="used">Used</option>
+        </select>
+    </div>
+    
+    <div class="mt-3">
+        <label for="grade">Grade:</label>
+        <select id="grade" name="grade">
+            <option value="A">Grade A</option>
+            <option value="B">Grade B</option>
+            <option value="C">Grade C</option>
+        </select>
+    </div>
+    
+    <h3 class="mt-3">Price: <span id="price">$0</span></h3>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const storageButtons = document.querySelectorAll('.storage-btn');
+            const modelRadios = document.querySelectorAll('input[name="model"]');
+            const conditionSelect = document.getElementById('condition');
+            const gradeSelect = document.getElementById('grade');
+            const priceDisplay = document.getElementById('price');
+            
+            storageButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    storageButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    updatePrice();
+                });
+            });
+            
+            modelRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    updatePrice();
+                    updateStorageButtons();
+                });
+            });
+            
+            conditionSelect.addEventListener('change', updatePrice);
+            gradeSelect.addEventListener('change', updatePrice);
+            
+            function updatePrice() {
+                const selectedStorage = document.querySelector('.storage-btn.active').value;
+                const selectedModel = document.querySelector('input[name="model"]:checked').value;
+                const selectedCondition = conditionSelect.value;
+                const selectedGrade = gradeSelect.value;
+                
+                // Placeholder pricing logic - replace with your actual pricing calculations
+                let basePrice = 0;
+                if (selectedModel === 'iphone12') {
+                    basePrice = 699;
+                } else if (selectedModel === 'iphone12pro') {
+                    basePrice = 999;
+                } else if (selectedModel === 'iphone12promax') {
+                    basePrice = 1099;
+                }
+                
+                let storagePrice = 0;
+                if (selectedStorage === '128GB') {
+                    storagePrice = 100;
+                } else if (selectedStorage === '256GB') {
+                    storagePrice = 200;
+                } else if (selectedStorage === '512GB') {
+                    storagePrice = 300;
+                }
+                
+                let conditionPrice = 0;
+                if (selectedCondition === 'used') {
+                    conditionPrice = -50;
+                }
+                
+                let gradePrice = 0;
+                if (selectedGrade === 'B') {
+                    gradePrice = -30;
+                } else if (selectedGrade === 'C') {
+                    gradePrice = -70;
+                }
+                
+                const totalPrice = basePrice + storagePrice + conditionPrice + gradePrice;
+                priceDisplay.innerText = '$' + totalPrice;
+            }
+            
+            function updateStorageButtons() {
+                const selectedModel = document.querySelector('input[name="model"]:checked').value;
+                storageButtons.forEach(button => {
+                    if (selectedModel === 'iphone12pro' || selectedModel === 'iphone12promax') {
+                        if (button.value === '64GB') {
+                            button.disabled = true;
+                            button.classList.remove('active');
+                        } else {
+                            button.disabled = false;
+                        }
+                    } else {
+                        button.disabled = false;
+                    }
+                });
+                
+                // If the active button becomes disabled, trigger updatePrice to recalculate
+                if (document.querySelector('.storage-btn.active').disabled) {
+                    updatePrice();
+                }
+            }
+            
+            // Initial update of storage buttons based on the selected model
+            updateStorageButtons();
+        });
+    </script>
+</body>
+</html>
