@@ -586,7 +586,7 @@
                   <div data-aos="slide-up" data-aos-offset="120" data-aos-delay="0" data-aos-duration="400"
                     data-aos-easing="ease-in-out" data-aos-once="true" class="sb-title sb-text-image__content-title "
                     data-component-field="title" data-sb-field="" data-sb-is-link="" data-sb-type="rich-text"
-                    data-sb-uuid="061dcc9a-77e0-487c-b957-ebb8adb97b2a">IPhone 5s</div>
+                    data-sb-uuid="061dcc9a-77e0-487c-b957-ebb8adb97b2a">IPhone 14 Series</div>
 
                   <div data-aos="slide-up" data-aos-offset="120" data-aos-delay="100" data-aos-duration="400"
                     data-aos-easing="ease-in-out" data-aos-once="true" class="sb-text-image__content-paragraph"
@@ -608,15 +608,62 @@
                       data-aos-easing="ease-in-out" data-aos-once="true" class="form js-form">
                     <div class="btn-group mt-3" role="group" aria-label="Model Options" data-is-required="true" class="form__group  form__group--required ">
                         <label class="btn btn-outline-primary">
-                            <input type="radio" name="model" value="iphone5"> iPhone 5s
+                            <input type="radio" name="model" value="iphone14"> iPhone 14
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="radio" name="model" value="iphone14plus"> iPhone 14 Plus
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="radio" name="model" value="iphone14pro"> iPhone 14 Pro
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="radio" name="model" value="iphone14promax"> iPhone 14 Pro Max
                         </label>
                     </div>
                     <div data-is-required="true" class="form__group  form__group--required ">
                         <button type="button" style="padding: 4px; color: white; background-color: #46d0f6; border: none;"
-                                class="btn btn-outline-primary storage-btn" value="16GB">16GB
+                                class="btn btn-outline-primary storage-btn" value="128GB">128GB
                         </button>
+                        <button type="button" style="padding: 4px; color: white; background-color: #46d0f6; border: none;"
+                                class="btn btn-outline-primary storage-btn" value="256GB">256GB
+                        </button>
+                        <button type="button" style="padding: 4px; color: white; background-color: #46d0f6; border: none;"
+                                class="btn btn-outline-primary storage-btn" value="512GB">512GB
+                        </button>
+                        <button type="button" style="padding: 4px; color: white; background-color: #46d0f6; border: none;"
+            class="btn btn-outline-primary storage-btn" value="1TB">1TB
+    </button>
                 
                     </div>
+                    <div data-is-required="true" class="form__group  form__group--required ">
+
+                      <label class="form__label contact-form__label" data-component-field="field" for="conditions">Phone Condition <span class="form__label-required" title="This field is required">*</span></label>
+
+                      <select required="" class="form__input form-select contact-form__input" id="conditions" name="conditions">
+                        <option selected>Select Conditions</option>
+                        <option value="new">New</option>
+                        <option value="direct">Direct</option>
+                      </select>
+
+                    </div>
+
+                     <div data-is-required="true" class="form__group  form__group--required ">
+
+                      <label class="form__label contact-form__label" for="grade">Grade <span
+                          class="form__label-required">*</span></label>
+
+                      <select required="" class="form__input form-select contact-form__input" id="grade" name="grade"
+                        aria-label="Default select example">
+                        <option selected>Select Grade</option>
+                        <option value="A">Grade A</option>
+                        <option value="B">Grade B</option>
+                        <option value="C">Grade C</option>
+                      </select>
+
+                    </div>
+                    <div data-is-required="true" class="form__group">
+                       <span id="error"></span>
+                       </div>
                     <div data-is-required="true" class="form__group  form__group--required ">
                 
                         <label class="form__label contact-form__label" data-component-field="field"
@@ -661,60 +708,144 @@
                 </div>
               </div>
               <script>
-document.addEventListener("DOMContentLoaded", function () {
+                document.addEventListener("DOMContentLoaded", function () {
     const storageButtons = document.querySelectorAll('.storage-btn');
     const modelRadios = document.querySelectorAll('input[name="model"]');
+    const conditionSelect = document.getElementById('conditions');
+    const gradeSelect = document.getElementById('grade');
     const priceDisplay = document.getElementById('price');
+    const errorDisplay = document.getElementById('error'); // Add an element for displaying errors
 
+    storageButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            storageButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            updatePrice();
+        });
+    });
 
-                    storageButtons.forEach(button => {
-                        button.addEventListener('click', function () {
-                            storageButtons.forEach(btn => btn.classList.remove('active'));
-                            this.classList.add('active');
-                            updatePrice();
-                        });
-                    });
-            
-                    modelRadios.forEach(radio => {
-                        radio.addEventListener('change', function () {
-                            updatePrice();
-                            updateStorageButtons();
-                        });
-                    });
+    modelRadios.forEach(radio => {
+        radio.addEventListener('change', function () {
+            updatePrice();
+            updateStorageButtons();
+        });
+    });
 
-            
-                    function updatePrice() {
-            const selectedStorage = document.querySelector('.storage-btn.active').value;
-            const selectedModel = document.querySelector('input[name="model"]:checked').value;
+    conditionSelect.addEventListener('change', updatePrice);
+    gradeSelect.addEventListener('change', updatePrice);
 
-            let basePrice = 0;
-            let storagePrice = 0;
+    function updatePrice() {
+        const selectedStorage = document.querySelector('.storage-btn.active').value;
+        const selectedModel = document.querySelector('input[name="model"]:checked').value;
+        const selectedCondition = conditionSelect.value;
+        const selectedGrade = gradeSelect.value;
+        let errorMessage = '';
 
-            // Define prices and adjustments based on model
-            if (selectedModel === 'iphone5') {
-                basePrice = 0;
-                storagePrice = getStoragePrice(selectedStorage, selectedModel);
+        let basePrice = 0;
+        let storagePrice = 0;
+        let conditionPrice = 0;
+        let gradePrice = 0;
+
+        // Define prices and adjustments based on model
+        if (selectedModel === 'iphone14') {
+            basePrice = 0;
+            storagePrice = getStoragePrice(selectedStorage, selectedModel);
+            conditionPrice = getConditionPrice(selectedCondition, selectedModel);
+            gradePrice = getGradePrice(selectedGrade, selectedModel);
+            if (selectedStorage === '1TB') {
+                errorMessage = '1TB storage is not available for iPhone 14.';
             }
-
-            const totalPrice = basePrice + storagePrice;
-            priceDisplay.innerText = '₦ ' + totalPrice.toLocaleString();
+        } else if (selectedModel === 'iphone14plus') {
+            basePrice = 0;
+            storagePrice = getStoragePrice(selectedStorage, selectedModel);
+            conditionPrice = getConditionPrice(selectedCondition, selectedModel);
+            gradePrice = getGradePrice(selectedGrade, selectedModel);
+            if (selectedStorage === '1TB') {
+                errorMessage = '1TB storage is not available for iPhone 14 Plus.';
+            }
+        } else if (selectedModel === 'iphone14pro') {
+            basePrice = 0;
+            storagePrice = getStoragePrice(selectedStorage, selectedModel);
+            conditionPrice = getConditionPrice(selectedCondition, selectedModel);
+            gradePrice = getGradePrice(selectedGrade, selectedModel);
+            if (selectedStorage === '1TB') {
+                errorMessage = '1TB storage is not available for iPhone 14 Pro.';
+            }
+        } else if (selectedModel === 'iphone14promax') {
+            basePrice = 0;
+            storagePrice = getStoragePrice(selectedStorage, selectedModel);
+            conditionPrice = getConditionPrice(selectedCondition, selectedModel);
+            gradePrice = getGradePrice(selectedGrade, selectedModel);
         }
 
-
-        function getStoragePrice(storage, model) {
-            // Define storage prices for each model
-            const storagePrices = {
-                'iphone5': {'16GB': 28000}
-            };
-
-            return storagePrices[model][storage] || 0;
-        }
+        const totalPrice = basePrice + storagePrice + conditionPrice + gradePrice;
+        priceDisplay.innerText = '₦ ' + totalPrice.toLocaleString();
+        errorDisplay.innerText = errorMessage; // Display the error message
+    }            
+                    function updateStorageButtons() {
+                        const selectedModel = document.querySelector('input[name="model"]:checked').value;
+                        storageButtons.forEach(button => {
+                            if ((selectedModel === 'iphone14pro' || selectedModel === 'iphone14promax') && button.value === '64GB') {
+                                button.disabled = true;
+                                button.classList.remove('active');
+                            } else if (selectedModel === 'iphone14' || selectedModel === 'iphone14plus') {
+                                if (button.value === '512GB') {
+                                    button.disabled = true;
+                                    button.classList.remove('active');
+                                } else {
+                                    button.disabled = false;
+                                }
+                            } else {
+                                button.disabled = false;
+                            }
+                        });
             
-                    // Initial update of price and storage buttons based on the selected model
+                        if (document.querySelector('.storage-btn.active').disabled) {
+                            updatePrice();
+                        }
+                    }
+            
+                    function getStoragePrice(storage, model) {
+                        // Define storage prices for each model
+                        const storagePrices = {
+                            'iphone14': {'128GB': 590000, '256GB': 710000},
+                            'iphone14plus': {'128GB': 720000, '256GB': 750000},
+                            'iphone14pro': {'128GB': 870000, '256GB': 930000, '512GB': 1180000},
+                            'iphone14promax': {'128GB': 930000, '256GB': 1050000, '512GB': 1250000, '1TB': 1410000}
+                        };
+            
+                        return storagePrices[model][storage] || 0;
+                    }
+            
+                    function getConditionPrice(condition, model) {
+                        // Define condition prices for each model
+                        const conditionPrices = {
+                            'iphone14': {'new': 0, 'direct': -10000},
+                            'iphone14plus': {'new': 0, 'direct': -10000},
+                            'iphone14pro': {'new': 0, 'direct': -10000},
+                            'iphone14promax': {'new': 0, 'direct': -10000}
+                        };
+            
+                        return conditionPrices[model][condition] || 0;
+                    }
+            
+                    function getGradePrice(grade, model) {
+                        // Define grade prices for each model
+                        const gradePrices = {
+                            'iphone14': {'A': -100000, 'B': -90000, 'C': -80000},
+                            'iphone14plus': {'A': 100000, 'B': -90000, 'C': -80000},
+                            'iphone14pro': {'A': 100000, 'B': -90000, 'C': -80000},
+                            'iphone14promax': {'A': 100000, 'B': -90000, 'C': -80000}
+                        };
+            
+                        return gradePrices[model][grade] || 0;
+                    }
+            
                     updatePrice();
                     updateStorageButtons();
                 });
             </script>
+            
               <script>
                 $(function () {
                   var $elem = $('[data-sb-uuid="cd6e0855-a20d-4c5f-ae7a-6799ee9a53a9"]'),
